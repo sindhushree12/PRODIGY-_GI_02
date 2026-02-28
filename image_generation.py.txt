@@ -1,0 +1,23 @@
+# Task-2: Image Generation using Pre-trained Model
+# Using Stable Diffusion
+
+from diffusers import StableDiffusionPipeline
+import torch
+
+# Load pre-trained model
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe = StableDiffusionPipeline.from_pretrained(model_id)
+
+# Use CPU (works without GPU)
+pipe = pipe.to("cpu")
+
+# Text prompt
+prompt = "A cat sitting on the moon"
+
+# Generate image
+image = pipe(prompt).images[0]
+
+# Save image
+image.save("generated_image.png")
+
+print("Image generated successfully!")
